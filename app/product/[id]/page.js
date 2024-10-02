@@ -1,5 +1,6 @@
 // app/product/[id]/page.js
 
+import NavBar from '@/app/components/NavBar';
 import Image from 'next/image';
 
 const ProductPage = ({ params }) => {
@@ -22,7 +23,7 @@ const ProductPage = ({ params }) => {
     {
       id: '3',
       name: "Blue Sports Cap",
-      price: 30,
+      price: 20,
       imageUrl: "/images/green-casual-cap.jpg",
     },
     // Add more products as needed
@@ -36,8 +37,10 @@ const ProductPage = ({ params }) => {
   }
 
   return (
+    <>
+    <NavBar />
     <div className="p-8">
-      <h1 className="text-2xl font-bold">{product.name}</h1>
+      <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
       <Image
         src={product.imageUrl}
         alt={product.name}
@@ -45,11 +48,12 @@ const ProductPage = ({ params }) => {
         height={300} // Adjust height as needed
         className="mt-4"
       />
-      <p className="mt-2">Price: ${product.price}</p>
+      <p className="mt-2 text-gray-600">Price: ${product.price}</p>
       <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
         Buy Now
       </button>
     </div>
+    </>
   );
 };
 

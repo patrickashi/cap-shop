@@ -1,23 +1,26 @@
-import Image from "next/image";
-import Link from "next/link";
+// app/page.js
 
-export default function Home() {
-  // Sample products data, you can fetch this from your backend later
+
+import NavBar from './components/NavBar'; // Adjust the path as necessary
+import Image from 'next/image';
+import Link from 'next/link';
+
+const Home = () => {
   const products = [
     {
-      id: 1,
+      id: '1',
       name: "Classic Black Cap",
       price: 25,
       imageUrl: "/images/black-cap.jpg",
     },
     {
-      id: 2,
+      id: '2',
       name: "Blue Sports Cap",
       price: 30,
       imageUrl: "/images/blue-sports-cap.jpg",
     },
     {
-      id: 3,
+      id: '3',
       name: "Green Casual Cap",
       price: 20,
       imageUrl: "/images/green-casual-cap.jpg",
@@ -25,21 +28,22 @@ export default function Home() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Welcome to the Cap Shop</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <>
+      <NavBar />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 my-20">
         {products.map((product) => (
-          <div key={product.id} className="border rounded-lg p-4 shadow-lg">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              width={300}
-              height={300}
-              className="w-full h-auto object-cover rounded-md"
-            />
-            <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
-            <p className="text-gray-600 mt-2">${product.price}</p>
+          <div key={product.id} className="border rounded-lg p-4">
+            <Link href={`/products/${product.id}`}>
+              <h2 className="text-lg font-bold text-gray-900">{product.name}</h2>
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                width={150}
+                height={150}
+                className="mt-2"
+              />
+            </Link>
+            <p className="mt-2 text-gray-600">Price: ${product.price}</p>
             <Link href={`/product/${product.id}`} legacyBehavior>
               <button className="inline-block mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
                 View Details
@@ -48,6 +52,8 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default Home;
